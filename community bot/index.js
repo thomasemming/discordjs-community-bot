@@ -7,6 +7,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 
+// ==================== COMMANDS ====================
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -20,6 +21,21 @@ for (const file of commandFiles) {
 	}
 }
 
+// ==================== EVENTS ====================
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+// ==================== INTERACTIONS ====================
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -57,10 +73,6 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply({ content: 'Something went wrong. Please try again later.', ephemeral: true });
 	  }
 	}
-  });
-
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 client.login(process.env.CLIENT_TOKEN);
