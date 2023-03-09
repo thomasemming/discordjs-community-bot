@@ -1,4 +1,4 @@
-# discordjs-community-bot
+# discordjs-community-bot 🤖
 
 The all-in-one comminuty bot for Discord
 
@@ -26,6 +26,11 @@ MEMBER_ROLE_ID=''
 
 ## Usage
 
+To initialize the slash commands, run the following command:
+```bash
+node deploy-commands.js
+```
+
 List of commands:
 ```bash
 # Creates an embed verification message in the welcome channel
@@ -35,6 +40,6 @@ List of commands:
 ```
 
 List of events:
-* When a user joins the server, a welcome message will be sent in the welcome channel and the user will also be granted the member role
-* When a banned word is detected, the message will be deleted and the user will receive a direct message
-* Once per hour, the member count channel will be updated with the new member count
+1. When a user joins the server, a welcome message will be sent in the welcome channel and the user will also be granted the member role
+2. When a banned word is detected, the message will be deleted and the user will receive a direct message
+3. Once per hour, the member count channel will be updated with the new member count
