@@ -33,8 +33,8 @@ node deploy-commands.js
 
 List of commands:
 ```bash
-# Creates an embed verification message in the welcome channel
-# The user that interacts with the message will be ranted the verified role
+# Creates an embed verification message in the channel where the command is used
+# The user that interacts with the message will be granted the verified role
 # NOTE: Only an admin can use this command!
 /verification
 ```
