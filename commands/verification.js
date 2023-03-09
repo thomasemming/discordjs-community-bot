@@ -3,7 +3,7 @@ const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = re
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('verification')
-        .setDescription('Creates a verification message. (Only works in #1081287634363625474)'),
+        .setDescription('Creates a verification message.'),
     async execute(interaction) {
 
         const embed = {
@@ -33,11 +33,12 @@ module.exports = {
                     .setEmoji('✅'),
 			);
 
-        if (interaction.user.id === '319366632017362946') {
+        // only an admin can use this command
+        if (interaction.member.permissions.has('ADMINISTRATOR')) {
             await interaction.channel.send({ embeds: [embed], components: [row] });
             await interaction.reply({ content: `Message sended`, ephemeral: true });
         } else {
-            await interaction.reply({ content: `You do not have permission to use this command.`, ephemeral: true });
+            interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
         }
     },
 };
