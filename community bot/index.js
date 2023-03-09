@@ -42,6 +42,22 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isButton()) return;
+  
+	if (interaction.customId === 'verification') {
+	  const role = interaction.guild.roles.cache.find(role => role.name === 'Verified');
+	  const member = interaction.member;
+  
+	  try {
+		await member.roles.add(role);
+		await interaction.reply({ content: 'You have accepted the rules and are now verified!', ephemeral: true });
+	  } catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'Something went wrong. Please try again later.', ephemeral: true });
+	  }
+	}
+  });
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
