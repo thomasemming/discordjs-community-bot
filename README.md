@@ -1,6 +1,7 @@
 # discordjs-community-bot 🤖
 
 The all-in-one community bot for Discord
+NOTE: This bot is work in progress, feel free to take a look but don't expect it to work properly!
 
 ## Installation
 
